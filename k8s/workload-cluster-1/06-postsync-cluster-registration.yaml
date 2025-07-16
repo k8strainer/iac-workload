@@ -78,11 +78,11 @@ spec:
             namespace: kube-system
           EOF
 
-          # 4) BEARER‑TOKEN über TokenRequest‑API erstellen (K8s ≥ 1.24)
+          # 4) BEARER‑TOKEN über TokenRequest-API erstellen (K8s ≥ 1.24)
           TOKEN=$(kubectl --kubeconfig /tmp/k.cfg -n kube-system \
                     create token argocd-manager --duration 8760h)
 
-          # 5) Argo‑CD‑Config‑JSON bauen
+          # 5) Argo-CD-Config-JSON bauen
           CONFIG=$(jq -nc --arg t "$TOKEN" --arg ca "$CA" \
             '{bearerToken:$t,tlsClientConfig:{insecure:false,caData:$ca}}')
 
