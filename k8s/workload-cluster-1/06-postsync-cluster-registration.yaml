@@ -7,7 +7,7 @@ metadata:
   name: register-cluster-to-argo
   namespace: argocd
   labels:
-    gen: "2"
+    gen: "1"
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation 
