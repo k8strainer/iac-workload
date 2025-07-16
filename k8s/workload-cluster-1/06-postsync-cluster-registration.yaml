@@ -79,28 +79,10 @@ spec:
           EOF
 
           # 4) BEARER‑TOKEN über TokenRequest-API erstellen (K8s ≥ 1.24)
-          TOKEN=$(kubectl --kubeconfig /tmp/k.cfg -n kube-system \
-                    create token argocd-manager --duration 8760h)
+          TOKEN=$(kubectl --kubeconfig /tmp/k.cfg -n kube-system create token argocd-manager --duration 8760h)
 
           # 5) Argo-CD-Config-JSON bauen
-          CONFIG=$(jq -nc --arg t "$TOKEN" --arg ca "$CA" \
-            '{bearerToken:$t,tlsClientConfig:{insecure:false,caData:$ca}}')
-
-
-
-
-#          # 4) Token des ServiceAccounts abgreifen
-#          SA_SECRET=$(kubectl --kubeconfig /tmp/k.cfg -n kube-system \
-#                       get sa argocd-manager \
-#                       -o jsonpath='{.secrets[0].name}')
-#
-#          TOKEN=$(kubectl --kubeconfig /tmp/k.cfg -n kube-system \
-#                   get secret ${SA_SECRET} \
-#                   -o jsonpath='{.data.token}' | base64 -d)
-#
-#          # 5) JSON Config für Argo CD Secret bauen
-#          CONFIG=$(jq -nc --arg t "$TOKEN" --arg ca "$CA" \
-#            '{bearerToken:$t,tlsClientConfig:{insecure:false,caData:$ca}}')
+          CONFIG=$(jq -nc --arg t "$TOKEN" --arg ca "$CA" '{bearerToken:$t,tlsClientConfig:{insecure:false,caData:$ca}}')
 
           # 6) Argo CD Cluster Secret erstellen/aktualisieren
           cat <<EOF | kubectl apply -f -
