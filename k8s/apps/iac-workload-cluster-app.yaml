@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iac-workload-cluster-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  destination:
+    namespace: team-a
+    server: https://kubernetes.default.svc
+  project: default
+  # change Project to 'group' Apps and apply specific settings
+  # according to sourceRepos, destination-Namespaces and -Servers etc.
+  #project: appproject-testing
+  source:
+    repoURL: https://github.com/k8strainer/iac-workload.git
+    targetRevision: main
+    path: k8s/workload-cluster-1/
+  syncPolicy:
+    automated:
+      # prune resources in live cluster if not available any more in Git
+      prune: true
+      # By default, changes that are made to the live cluster will not trigger automated sync.
+      # To enable automatic sync when the live cluster's state deviates from the state defined in Git, run:
+      selfHeal: true
+    # sync retry
+    retry:
+      limit: 5
