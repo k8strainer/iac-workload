@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: core-services-appset
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"         # Wave 1  →  nach Wave 0
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            env: dev
+            team: a
+  template:
+    metadata:
+      name: core-services-{{name}}
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/k8strainer/iac-workload.git
+        targetRevision: main
+        path: k8s/apps/core-services          
+      destination:
+        server: "{{server}}"                 
+        namespace: kube-system
+      syncPolicy:
+        automated: { prune: true, selfHeal: true }
