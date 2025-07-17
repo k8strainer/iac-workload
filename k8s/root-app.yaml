@@ -10,8 +10,8 @@ spec:
     repoURL: https://github.com/k8strainer/iac-workload.git
     targetRevision: main
     path: k8s/apps                 # <‑ Verzeichnis mit Application für GKE Workload cluster und AppSet für Core Services
-    directory:
-      recurse: true                # alle *.yaml Dateien einlesen
+    #directory:
+    #  recurse: true                
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
