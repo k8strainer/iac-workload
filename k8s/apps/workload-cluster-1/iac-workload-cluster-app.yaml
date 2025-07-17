@@ -1,0 +1,21 @@
+# k8s/apps/workload-cluster-1/iac-workload-cluster-app.yaml (Child #1)
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: iac-workload-cluster-app
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"            # Wave 0
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/k8strainer/iac-workload.git
+    targetRevision: main
+    path: k8s/apps/workload-cluster-1
+  destination:
+    server: https://kubernetes.default.svc       # Management‑Cluster
+    namespace: team-a
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
