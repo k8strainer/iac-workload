@@ -1,6 +1,6 @@
-# =========================================================
-# PostSync Hook: registriert einen neuen CAPI Cluster in Argo CD
-# =========================================================
+# =============================================================
+# PostSync Hook: registriert einen Workload Cluster in Argo CD
+# =============================================================
 apiVersion: batch/v1
 kind: Job
 metadata:
