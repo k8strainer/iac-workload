@@ -14,10 +14,10 @@ spec:
         - key: env
           operator: In
           values: ["dev", "staging"]
-        # explizit alle mgmt Cluster ausschließen
-        - key: env
-          operator: NotIn
-          values: ["mgmt"]
+        # Nur team "a"
+        - key: team
+          operator: In
+          values: ["a"]
       values:
         # Platzhalter für den Cluster Namen
         cluster_name: "{{ .name }}"
