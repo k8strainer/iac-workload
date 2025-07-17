@@ -20,7 +20,7 @@ spec:
       source:
         repoURL: https://github.com/k8strainer/iac-workload.git
         targetRevision: main
-        path: k8s/apps/core-services          
+        path: k8s/core-services          
       destination:
         server: "{{server}}"                 
         namespace: kube-system

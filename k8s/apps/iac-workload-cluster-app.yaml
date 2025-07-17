@@ -16,7 +16,7 @@ spec:
   source:
     repoURL: https://github.com/k8strainer/iac-workload.git
     targetRevision: main
-    path: k8s/apps/workload-cluster-1/
+    path: k8s/workload-cluster-1/
   syncPolicy:
     automated:
       # prune resources in live cluster if not available any more in Git
