@@ -38,9 +38,6 @@ spec:
 
           echo "[Hook] Registriere Cluster ${CLUSTER_NAME}"
 
-          # 0) Abhängigkeit jq nachinstallieren (Alpine base)
-          #apk add --no-cache jq >/dev/null
-
           # 1) Kubeconfig Secret, das CAPI angelegt hat, auslesen
           kubectl -n ${CLUSTER_NS} get secret ${CLUSTER_NAME}-kubeconfig \
             -o jsonpath='{.data.value}' | base64 -d > /tmp/k.cfg
