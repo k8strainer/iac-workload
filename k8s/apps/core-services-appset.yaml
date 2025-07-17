@@ -7,11 +7,20 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"         # Wave 1  →  nach Wave 0
 spec:
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-            env: dev
-            team: a
+  - clusters:
+      selector:
+        matchExpressions:
+        # nur Cluster mit env=dev  ODER  env=staging
+        - key: env
+          operator: In
+          values: ["dev", "staging"]
+        # explizit alle mgmt Cluster ausschließen
+        - key: env
+          operator: NotIn
+          values: ["mgmt"]
+      values:
+        # Platzhalter für den Cluster Namen
+        cluster_name: "{{ .name }}"
   template:
     metadata:
       name: core-services-{{name}}
