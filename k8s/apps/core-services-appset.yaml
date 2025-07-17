@@ -30,8 +30,8 @@ spec:
         repoURL: https://github.com/k8strainer/iac-workload.git
         targetRevision: main
         path: k8s/core-services          
-        #directory:
-        #  recurse: true                # alle *.yaml Dateien einlesen
+        directory:
+          recurse: true                # alle *.yaml Dateien einlesen
 
       destination:
         server: "{{server}}"                 
