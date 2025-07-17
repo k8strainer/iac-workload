@@ -2,17 +2,17 @@ Ziel: Vollständig automatisiertes Ausrollen eines neuen GKE Workload Clusters p
 
 Verzeichnis Layout
 
-repo/
-└─ k8s/
-   ├─ root-app.yaml                   # Root‑Application (App of Apps)
-   ├─ apps/                           # <– *nur* Application / ApplicationSet YAMLs!
-   │   ├─ workload-app.yaml           # Child Application – erstellt Cluster  (Wave 0)
-   │   └─ core-services-appset.yaml   # ApplicationSet  – rollt Core Services (Wave 1) aus
-   ├─ workload-cluster-1/             # CAPI Manifeste (Cluster, MachinePool, Hook …)
-   │   ├─ 04-gke-workload-cluster.yaml
-   │   └─ 06-postsync-cluster-registration.yaml
-   └─ core-services/                  # Reine YAML Manifeste
-       ├─ cert-manager/
-       │   └─ cert-manager-v1.17.2.yaml
-       └─ ingress/
-           └─ nginx-ingress-1.11.5.yaml
+├── k8s
+│   ├── apps
+│   │   ├── core-services-appset.yaml     #ApplicationSet für CertMan,Ingress 
+│   │   └── iac-workload-cluster-app.yaml #Application für Workload Cluster
+│   ├── core-services                     #Core-Dienste: CertMan, Ingress
+│   │   ├── cert-manager
+│   │   │   └── cert-manager.yaml         #All-in-One Manifest
+│   │   └── ingress
+│   │       └── nginx-ingress.yaml        #All-in-One Manifest
+│   ├── root-app.yaml                     #Root-App -> zeigt auf k8s/apps
+│   └── workload-cluster-1                #Ressourcen für Workload Cluster
+│       ├── 04-gke-workload-cluster.yaml
+│       └── 06-postsync-cluster-registration.yaml
+└── README.md
