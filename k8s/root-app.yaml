@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/k8strainer/iac-workload.git
     targetRevision: main
-    path: k8s/apps                 # <‑ Verzeichnis mit den beiden Child‑Ordnern cert-manager und ingress
+    path: k8s/apps                 # <‑ Verzeichnis mit Application für GKE Workload cluster und AppSet für Core Services
     directory:
       recurse: true                # alle *.yaml Dateien einlesen
   destination:
