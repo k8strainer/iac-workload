@@ -1,7 +1,7 @@
 Ziel: Vollständig automatisiertes Ausrollen eines neuen GKE Workload Clusters plus Installation zentraler Core Services (Ingress Nginx, Cert Manager …) mit Argo CD – ohne manuelle URL Pflege und ohne Helm.
 
 Verzeichnis Layout
-
+```text
 ├── k8s
 │   ├── apps
 │   │   ├── core-services-appset.yaml     #ApplicationSet für CertMan,Ingress 
